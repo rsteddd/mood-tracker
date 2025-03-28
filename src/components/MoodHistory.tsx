@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../store/store';
+import {AppDispatch, RootState} from '../store/store';
 import { removeMood } from '../store/moodSlice';
 
 const MoodHistory: React.FC = () => {
     const moods = useSelector((state: RootState) => state.moods);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
 

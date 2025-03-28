@@ -27,7 +27,7 @@ const MoodStats: React.FC = () => {
 
     return (
         <div className="p-4 sm:p-6 bg-gray-800 rounded-lg shadow-lg animate-slide-up transform hover:-translate-y-1 transition-all duration-300">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-200 mb-4 animate-fade-in">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-200 mb-4 animate-fade-in text-center">
                 Mood Statistics
             </h2>
             <div className="max-w-lg mx-auto space-y-3">

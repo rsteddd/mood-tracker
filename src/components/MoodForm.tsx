@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addMood } from '../store/moodSlice';
+import {AppDispatch} from "../store/store.ts";
 
 const MoodForm: React.FC = () => {
     const [mood, setMood] = useState<string>('');
     const [note, setNote] = useState<string>('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleSubmit = () => {
         if (!mood) {
