@@ -63,8 +63,15 @@ const MoodChart: React.FC = () => {
 
     const options: ChartOptions<'line'> = {
         responsive: true,
+        maintainAspectRatio: false, // Дозволяє графіку адаптувати висоту
         plugins: {
-            legend: { position: 'top' as const, labels: { color: '#D1D5DB' } },
+            legend: {
+                position: 'top' as const,
+                labels: {
+                    color: '#D1D5DB',
+                    font: { size: 14 } // Збільшуємо шрифт легенди
+                }
+            },
             title: {
                 display: true,
                 text: 'Mood Chart',
@@ -86,13 +93,32 @@ const MoodChart: React.FC = () => {
             },
         },
         scales: {
-            x: { ticks: { color: '#9CA3AF' } },
+            x: {
+                ticks: {
+                    color: '#9CA3AF',
+                    font: { size: 12 }, // Розмір шрифту дат
+                    maxRotation: 45, // Ротація дат для читабельності
+                    minRotation: 45,
+                    autoSkip: true, // Пропускає зайві дати
+                    maxTicksLimit: 10, // Обмежує кількість міток
+                },
+                grid: { display: false }, // Прибираємо сітку по X
+            },
             y: {
                 min: 0,
                 max: 3,
                 ticks: {
                     stepSize: 1,
                     color: '#9CA3AF',
+                    font: { size: 14 }, // Збільшуємо шрифт для осі Y
+                    callback: (value) => {
+                        switch (value) {
+                            case 1: return 'Sad';
+                            case 2: return 'Energetic';
+                            case 3: return 'Happy';
+                            default: return '';
+                        }
+                    },
                 },
                 grid: { color: '#374151' },
             },
@@ -105,7 +131,7 @@ const MoodChart: React.FC = () => {
 
     return (
         <div className="p-4 sm:p-6 bg-gray-800 rounded-lg shadow-lg animate-slide-up transform hover:-translate-y-1 transition-all duration-300">
-            <div className="bg-gray-900 p-4 rounded-lg max-w-lg mx-auto border border-transparent bg-gradient-to-r from-blue-500/20 to-indigo-500/20 animate-pulse-glow">
+            <div className="bg-gray-900 p-4 rounded-lg max-w-lg mx-auto border border-transparent bg-gradient-to-r from-blue-500/20 to-indigo-500/20 animate-pulse-glow h-64 sm:h-80 ">
                 <Line data={chartData} options={options} />
             </div>
         </div>
